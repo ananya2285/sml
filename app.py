@@ -50,7 +50,7 @@ def app():
         input_array=np.array(input_array)
 
         # Make a prediction
-        prediction = model.predict(input_array)[0]
+        prediction = model.predict([input_array])[0]
 
         # Display the prediction to the user
         if prediction == 0:
