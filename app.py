@@ -27,17 +27,17 @@ def app():
     input_array.append(amount)
     input_array.append(oldbalanceOrg)
     input_array.append(newbalanceOrig)
-    if(type=='cash_out'):
+    if(type=='CASH_OUT'):
         input_array.append(1)
         input_array.append(0)
         input_array.append(0)
         input_array.append(0)
-    elif(type=='transfer'):
+    elif(type=='TRANSFER'):
         input_array.append(0)
         input_array.append(1)
         input_array.append(0)
         input_array.append(0)
-    elif(type=='debit'):
+    elif(type=='DEBIT'):
         input_array.append(0)
         input_array.append(0)
         input_array.append(1)
