@@ -48,6 +48,11 @@ def app():
         input_array.append(0)
         input_array.append(1)
         input_array=np.array(input_array)
+        
+         # When the user clicks the 'Predict' button, make a prediction
+        if st.button('Predict'):
+        # Preprocess the user input
+        #input_array = preprocess_input(step, amount, oldbalanceOrg, newbalanceOrig, oldbalanceDest, newbalanceDest, isFlaggedFraud, type_PAYMENT)
 
         # Make a prediction
         prediction = model.predict([input_array])[0]
