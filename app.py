@@ -58,4 +58,3 @@ def app():
         else:
             st.error('This transaction is fraudulent.')
 
-app()
