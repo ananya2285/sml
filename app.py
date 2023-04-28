@@ -55,12 +55,12 @@ def app():
         #input_array = preprocess_input(step, amount, oldbalanceOrg, newbalanceOrig, oldbalanceDest, newbalanceDest, isFlaggedFraud, type_PAYMENT)
 
         # Make a prediction
-        prediction = model.predict([input_array])[0]
+            prediction = model.predict([input_array])[0]
 
         # Display the prediction to the user
-        if prediction == 0:
-            st.success('This transaction is not fraudulent.')
-        else:
-            st.error('This transaction is fraudulent.')
+            if prediction == 0:
+                st.success('This transaction is not fraudulent.')
+            else:
+                st.error('This transaction is fraudulent.')
 
 app()
