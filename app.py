@@ -50,7 +50,7 @@ def app():
         input_array=np.array(input_array)
         
          # When the user clicks the 'Predict' button, make a prediction
-        if st.button('Predict'):
+    if st.button('Predict'):
         # Preprocess the user input
         #input_array = preprocess_input(step, amount, oldbalanceOrg, newbalanceOrig, oldbalanceDest, newbalanceDest, isFlaggedFraud, type_PAYMENT)
 
