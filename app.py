@@ -8,14 +8,6 @@ import numpy as np
 with open('model_kn.pkl', 'rb') as file:
     model = joblib.load(file)
     
-import streamlit as st
-import pandas as pd
-import pickle
-
-# Load the trained model
-with open('model.pkl', 'rb') as f:
-    model = pickle.load(f)
-
 # Define a function to preprocess input data
 def preprocess_data(df):
     # Apply any necessary preprocessing to the input dataframe
