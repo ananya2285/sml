@@ -19,7 +19,7 @@ def preprocess_data(df):
 # Define the Streamlit app
 def app():
     # Set the page title
-    st.set_page_config(page_title='Fraud Detection' ,page_icon=':money_with_wings:)
+    st.set_page_config(page_title='Fraud Detection' ,page_icon=':money_with_wings:')
 
     # Define the app title and subtitle
     st.title('Fraud Detection')
