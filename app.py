@@ -7,62 +7,60 @@ import numpy as np
 # Load the saved model
 with open('model_kn.pkl', 'rb') as file:
     model = joblib.load(file)
-    
-# Define a function to preprocess input data
-def preprocess_data(df):
-    # Apply any necessary preprocessing to the input dataframe
-    # For example, label encoding the 'type' column as in the previous question
-    le = LabelEncoder()
-    df['type'] = le.fit_transform(df['type'])
-    return df
 
-# Define the Streamlit app
+# Create the Streamlit app
 def app():
-    # Set the page title
-    st.set_page_config(page_title='Fraud Detection')
+    # Set app title and header
+    st.set_page_config(page_title='Fraud Detection App', page_icon=':money_with_wings:')
+    st.title('Fraud Detection App')
 
-    # Define the app title and subtitle
-    st.title('Fraud Detection')
-    st.subheader('Detect fraudulent transactions')
-
-    # Create a form for the user to input data
-    st.sidebar.title('Input data')
-    step = st.sidebar.number_input('Step', value=1)
-    amount = st.sidebar.number_input('Amount', value=0.0)
-    oldbalanceOrg = st.number_input('Old balance of sender account', value=0.0)
-    newbalanceOrig = st.number_input('New balance of sender account', value=0.0)
-    oldbalanceDest = st.number_input('Old balance of recipient account', value=0.0)
-    newbalanceDest = st.number_input('New balance of recipient account', value=0.0)
-    isFlaggedFraud = st.number_input('Is flagged as fraud', value=0)
-    type = st.sidebar.selectbox('Transaction type', ['CASH_OUT', 'CASH_IN', 'TRANSFER', 'DEBIT', 'PAYMENT'])
-
-    # Create a dataframe with the input data
-    data = {
-        'step': [step],
-        'amount': [amount],
-        'oldbalanceOrg': [oldbalanceOrg],
-        'newbalanceOrig': [newbalanceOrig],
-        'oldbalanceDest': [oldbalanceDest],
-        'newbalanceDest': [newbalanceDest],
-        'isFlaggedFraud': [isFlaggedFraud],
-        'type': [type]
-    }
-    df = pd.DataFrame(data)
-
-    # Preprocess the input data
-    df = preprocess_data(df)
-
-    # Make predictions using the trained model
-    predictions = model.predict(df)
-
-    # Display the predictions to the user
-    if predictions[0] == 0:
-        st.success('This transaction is not fraudulent')
+    # Create input fields for user to enter data
+    st.subheader('Enter transaction details:')
+    step = st.number_input('Step', min_value=1)
+    amount = st.number_input('Amount', min_value=0.0)
+    oldbalanceOrg = st.number_input('Old Balance Org', min_value=0.0)
+    newbalanceOrig = st.number_input('New Balance Orig', min_value=0.0)
+    type = st.selectbox('Type of payment', ['CASH_OUT', 'TRANSFER', 'DEBIT', 'PAYMENT'])
+    # When the user clicks the 'Predict' button, make a prediction
+    input_array=[]
+    input_array.append(step)
+    input_array.append(amount)
+    input_array.append(oldbalanceOrg)
+    input_array.append(newbalanceOrig)
+    if(type=='CASH_OUT'):
+        input_array.append(1)
+        input_array.append(0)
+        input_array.append(0)
+        input_array.append(0)
+    elif(type=='TRANSFER'):
+        input_array.append(0)
+        input_array.append(1)
+        input_array.append(0)
+        input_array.append(0)
+    elif(type=='DEBIT'):
+        input_array.append(0)
+        input_array.append(0)
+        input_array.append(1)
+        input_array.append(0)
     else:
-        st.error('This transaction is fraudulent')
+        input_array.append(0)
+        input_array.append(0)
+        input_array.append(0)
+        input_array.append(1)
+        input_array=np.array(input_array)
+        
+         # When the user clicks the 'Predict' button, make a prediction
+    if st.button('Predict'):
+        # Preprocess the user input
+        #input_array = preprocess_input(step, amount, oldbalanceOrg, newbalanceOrig, oldbalanceDest, newbalanceDest, isFlaggedFraud, type_PAYMENT)
 
-# Run the Streamlit app
-if __name__ == '__main__':
-    app()
+        # Make a prediction
+            prediction = model.predict([input_array])[0]
 
+        # Display the prediction to the user
+            if prediction == 0:
+                st.success('This transaction is not fraudulent.')
+            else:
+                st.error('This transaction is fraudulent.')
 
+app()
