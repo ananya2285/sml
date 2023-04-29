@@ -13,6 +13,8 @@ def app():
     # Set app title and header
     st.set_page_config(page_title='Fraud Detection App', page_icon=':money_with_wings:')
     st.title('Fraud Detection App')
+    st.subheader('Detect fraudulent transactions')
+
 
     # Create input fields for user to enter data
     st.subheader('Enter transaction details:')
