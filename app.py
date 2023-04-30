@@ -12,7 +12,7 @@ with open(r'model_rfc.pkl', 'rb') as file:
 # Create the Streamlit app
 def app():
     # Set app title and header
-    st.set_page_config(page_title='Fraud Detection App', page_icon=':money_with_wings:',  page_bg_color='#87CEFA')
+    st.set_page_config(page_title='Fraud Detection App', page_icon=':money_with_wings:',layout='wide', page_bg_color='#87CEFA')
     st.title('Fraud Detection App')
     st.subheader('Detect fraudulent transactions')
 
