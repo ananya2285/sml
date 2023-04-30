@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 
 # Load the saved model
-with open('C:\Users\kumar\dep\model_rfc.pkl', 'rb') as file:
+with open(r'C:\Users\kumar\dep\model_rfc.pkl', 'rb') as file:
     model = joblib.load(file)
 
 
